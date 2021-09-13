@@ -20,7 +20,7 @@ function mostrarMovimientos(movimientos) {
   const $movimientos = document.querySelector('#movimientos');
 
   movimientos.forEach((movimiento) => {
-    const { movimiento: nombreMovimiento, versiones } = movimiento;
+    const { nombre: nombreMovimiento, versiones } = movimiento; //Corrige que no se ven los nombres
     const $movimientoFila = document.createElement('tr');
     const $movimiento = document.createElement('th');
     $movimiento.setAttribute('scope', 'row');
