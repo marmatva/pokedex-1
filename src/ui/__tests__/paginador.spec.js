@@ -5,7 +5,7 @@ beforeEach(()=>{
     document.body.innerHTML=fixture;
 })
 
-test('Calls main fuction without urlAnterior', ()=>{
+test('Test main fuction without urlAnterior', ()=>{
     mostrarPaginador(898,5,'https://asd.com/');
     let pager = document.querySelector('#paginador');
     let buttonAnterior = pager.querySelector('li');
@@ -13,7 +13,7 @@ test('Calls main fuction without urlAnterior', ()=>{
     expect(buttonAnterior.classList).toContain('disabled');   
 })
 
-test('Calls main function without urlSiguiente', ()=>{
+test('Test main function without urlSiguiente', ()=>{
     mostrarPaginador(898,5,"",'https://asd.com/');
     let pager = document.querySelector('#paginador');
     let buttons = pager.querySelectorAll('li');
@@ -22,8 +22,9 @@ test('Calls main function without urlSiguiente', ()=>{
     expect(buttonSiguiente.classList).toContain('disabled');   
 })
 
-test('Calls main function', ()=>{
-    mostrarPaginador(898,5,'https://asd.com/','https://asd.com/');
+test('Test main function', ()=>{
+    let callbackTest = jest.fn()
+    mostrarPaginador(898,5,'https://asd.com/','https://asd.com/', callbackTest);
     let pager = document.querySelector('#paginador');
     let buttons = pager.querySelectorAll('li');
     
@@ -48,8 +49,7 @@ test('Calls main function', ()=>{
 
     buttonSiguiente.click();
 
-    expect(document.querySelectorAll('li.active')).toHaveLength(1);
-    expect(document.querySelectorAll('li.active')[0].textContent).toEqual('5');
+    expect(callbackTest).toHaveBeenCalledTimes(1);
 })
 
 test('Test main function with Callback function', ()=>{
